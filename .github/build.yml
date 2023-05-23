@@ -1,0 +1,25 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+name: Publish snapshot package to the Maven Central Repository
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    env:
+      CI_TEST: ${{ secrets.ONLY_FOR_TEST }}
+      ENV_SHOW: "show me"
+    steps:
+      - name: test env
+        run: |
+          echo "new test: $CI_TEST, $ENV_SHOW"
