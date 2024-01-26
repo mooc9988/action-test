@@ -4,23 +4,13 @@ on:
 
 jobs:
   job1:
-    name: "1. call workflow in local repo"
-    runs-on: ubuntu-latest
-    steps:
-      - id: foo
-        uses: ./.github/workflows/reusable-workflow.yml
-        with:
-          test-name: "base test"
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+    name: "1. call workflow in remote repo"
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      test-name: "base test"
   job2:
     name: "2. call workflow in local repo"
-    runs-on: ubuntu-latest
-    steps:
-      - id: noop
-        uses: ./.github/workflows/reusable-workflow.yml
-        with:
-          test-name: "futher test"
-      - run: echo random-number ${{ steps.noop.outputs.random-number }}
-        shell: bash
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      test-name: "futher test"
       
