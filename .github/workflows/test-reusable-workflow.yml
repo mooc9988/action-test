@@ -1,9 +1,26 @@
 on: 
   workflow_dispatch:
-  # push:
+  push:
 
 jobs:
-  call-workflow-in-local-repo:
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      config-path: ./.github/workflows/blank.yml
+  job1:
+    name: "1. call workflow in local repo"
+    runs-on: ubuntu-latest
+    steps:
+      - id: foo
+        uses: ./.github/workflows/reusable-workflow.yml
+        with:
+          test-name: "base test"
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
+  job2:
+    name: "2. call workflow in local repo"
+    runs-on: ubuntu-latest
+    steps:
+      - id: noop
+        uses: ./.github/workflows/reusable-workflow.yml
+        with:
+          test-name: "futher test"
+      - run: echo random-number ${{ steps.noop.outputs.random-number }}
+        shell: bash
+      

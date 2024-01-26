@@ -3,14 +3,29 @@ name: Reusable workflow example
 on:
   workflow_call:
     inputs:
-      config-path:
+      test-name:
         required: true
         type: string
+    outputs:
+      random-number:
+        description: "Random number"
+        value: ${{ steps.random-number-generator.outputs.random-number }}
 
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        configuration-path: ${{ inputs.config-path }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: show test name
+        run: echo ${{ inputs.test-name }}
+        shell: bash
+      - run: echo Hello ${{ inputs.who-to-greet }}.
+        shell: bash
+      - id: random-number-generator
+        run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+        shell: bash
+      - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+        shell: bash
+      - run: goodbye.sh
+        shell: bash
