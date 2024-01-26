@@ -1,0 +1,9 @@
+on: 
+  workflow_dispatch:
+  # push:
+
+jobs:
+  call-workflow-in-local-repo:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      config-path: ./.github/workflows/blank.yml
