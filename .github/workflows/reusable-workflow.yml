@@ -27,5 +27,5 @@ jobs:
         shell: bash
       - run: echo "$(pwd)"
         shell: bash
-      - run: goodbye.sh
+      - run: ./goodbye.sh
         shell: bash
