@@ -8,11 +8,15 @@ jobs:
     uses: ./.github/workflows/reusable-workflow.yml
     with:
       test-name: "base test"
+    secrets:
+      web_hook: ${{ secrets.WEB_HOOK_URL }}
   job2:
     name: "2. call workflow in local repo"
     uses: ./.github/workflows/reusable-workflow.yml
     with:
       test-name: "futher test"
+    secrets:
+      web_hook: ${{ secrets.WEB_HOOK_URL }}
   summary:
     name: "summary jobs"
     runs-on: ubuntu-22.04

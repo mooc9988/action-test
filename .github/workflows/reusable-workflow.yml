@@ -6,6 +6,9 @@ on:
       test-name:
         required: true
         type: string
+    secrets:
+      web_hook:
+        required: true
     # outputs:
     #   random-number:
     #     description: "Random number"
@@ -34,4 +37,4 @@ jobs:
       - run: ./goodbye.sh
         shell: bash
         env:
-          WEB_HOOK_URL: ${{ secrets.WEB_HOOK_URL }}
+          HOOK_URL: ${{ secrets.web_hook }}
