@@ -11,6 +11,8 @@ jobs:
       ESK_TEST_YML: "tests/kos_test_suite.yml"
       DUCKER_TEST_OPTIONS: "-f"
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: reuse workflow
         uses: ./.github/workflows/reusable-workflow.yml
         with:
@@ -23,6 +25,8 @@ jobs:
       ESK_TEST_YML: "tests/kos_test_suite.yml"
       DUCKER_TEST_OPTIONS: "-f"
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: reuse workflow
         uses: ./.github/workflows/reusable-workflow.yml
         with:
