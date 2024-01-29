@@ -6,15 +6,17 @@ on:
       test-name:
         required: true
         type: string
-    # outputs:
-    #   random-number:
-    #     description: "Random number"
-    #     value: ${{ steps.random-number-generator.outputs.random-number }}
+    outputs:
+      random-number:
+        description: "Random number"
+        value: ${{ steps.random-number-generator.outputs.random-number }}
 
 jobs:
   triage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: show test name
         run: echo ${{ inputs.test-name }}
         shell: bash

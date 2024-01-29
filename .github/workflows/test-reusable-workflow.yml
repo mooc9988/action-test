@@ -5,32 +5,14 @@ on:
 jobs:
   job1:
     name: "1. call workflow in remote repo"
-    runs-on: ubuntu-22.04 
-    env:
-      TC_GENERAL_MIRROR_URL: "mirrors.ustc.edu.cn"
-      ESK_TEST_YML: "tests/kos_test_suite.yml"
-      DUCKER_TEST_OPTIONS: "-f"
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: reuse workflow
-        uses: ./.github/workflows/reusable-workflow.yml
-        with:
-          test-name: "base test"
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      test-name: "base test"
   job2:
     name: "2. call workflow in local repo"
-    runs-on: ubuntu-22.04 
-    env:
-      TC_GENERAL_MIRROR_URL: "mirrors.ustc.edu.cn"
-      ESK_TEST_YML: "tests/kos_test_suite.yml"
-      DUCKER_TEST_OPTIONS: "-f"
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: reuse workflow
-        uses: ./.github/workflows/reusable-workflow.yml
-        with:
-          test-name: "futher test"
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      test-name: "futher test"
   summary:
     name: "summary jobs"
     runs-on: ubuntu-22.04
@@ -39,4 +21,6 @@ jobs:
       - name: show success
         run: echo "success"
         shell: bash
-      
+      - name: Collect build result
+        run: |
+          echo job1-${{ needs.job1.result }},job2-${{ needs.job2.result }}
