@@ -5,12 +5,37 @@ on:
 jobs:
   job1:
     name: "1. call workflow in remote repo"
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      test-name: "base test"
+    runs-on: ubuntu-22.04 
+    env:
+      TC_GENERAL_MIRROR_URL: "mirrors.ustc.edu.cn"
+      ESK_TEST_YML: "tests/kos_test_suite.yml"
+      DUCKER_TEST_OPTIONS: "-f"
+    steps:
+      - name: reuse workflow
+        uses: ./.github/workflows/reusable-workflow.yml
+        with:
+          test-name: "base test"
   job2:
     name: "2. call workflow in local repo"
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      test-name: "futher test"
+    runs-on: ubuntu-22.04 
+    env:
+      TC_GENERAL_MIRROR_URL: "mirrors.ustc.edu.cn"
+      ESK_TEST_YML: "tests/kos_test_suite.yml"
+      DUCKER_TEST_OPTIONS: "-f"
+    steps:
+      - name: reuse workflow
+        uses: ./.github/workflows/reusable-workflow.yml
+        with:
+          test-name: "futher test"
+  summary:
+    name: "summary jobs"
+    runs-on: ubuntu-22.04
+    needs: [job1, job2]
+    steps:
+      - name: show test name
+        run: echo ${{ needs.job1.outputs.random-number }}
+        shell: bash
+      - name: show test name
+        run: echo ${{ needs.job2.outputs.random-number }}
+        shell: bash
       
