@@ -14,6 +14,8 @@ on:
 jobs:
   triage:
     runs-on: ubuntu-22.04 
+    env:
+      TEST_ENV: "test env"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -27,5 +29,9 @@ jobs:
         shell: bash
       - run: echo "$(pwd)"
         shell: bash
+      - run: echo "${TEST_ENV}"
+        shell: bash
       - run: ./goodbye.sh
         shell: bash
+        env:
+          WEB_HOOK_URL: ${{ secrets.WEB_HOOK_URL }}
