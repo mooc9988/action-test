@@ -32,10 +32,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [job1, job2]
     steps:
-      - name: show test name
-        run: echo ${{ needs.job1.outputs.random-number }}
-        shell: bash
-      - name: show test name
-        run: echo ${{ needs.job2.outputs.random-number }}
+      - name: show success
+        run: echo "success"
         shell: bash
       

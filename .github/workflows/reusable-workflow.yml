@@ -6,10 +6,10 @@ on:
       test-name:
         required: true
         type: string
-    outputs:
-      random-number:
-        description: "Random number"
-        value: ${{ steps.random-number-generator.outputs.random-number }}
+    # outputs:
+    #   random-number:
+    #     description: "Random number"
+    #     value: ${{ steps.random-number-generator.outputs.random-number }}
 
 jobs:
   triage:
