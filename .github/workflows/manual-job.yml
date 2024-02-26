@@ -1,0 +1,33 @@
+name: Manually touched job
+
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: 'used module'
+        required: true
+        default: 'module-a'
+        type: choice
+        options:
+          - module-a
+          - module-a
+      skip_ami_building:
+        description: 'skip building'
+        required: true
+        type: choice
+        default: 'false'
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  run_long_running:
+    name: "Manual touching"
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo module:${{ inputs.module }}, skip_ami_building:${{ inputs.skip_ami_building }}
+        shell: bash
+      - name: check if step
+        run: echo hello world
+        shell: bash
+        if : ${{ inputs.skip_ami_building == 'false' && inputs.module == 'module-a' }}
