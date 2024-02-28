@@ -21,7 +21,7 @@ on:
           - 'false'
 
 jobs:
-  run_long_running:
+  run_manual:
     name: "Manual touching"
     runs-on: ubuntu-22.04
     steps:
