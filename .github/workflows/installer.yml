@@ -33,7 +33,7 @@ jobs:
         with:
           # Required, playbook filepath
           playbook: deploy.yaml
-          # # Optional, directory where playbooks live
+          # Optional, directory where playbooks live
           directory: ./ansible
       - run: ansible --version
       # installer kos
