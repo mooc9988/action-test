@@ -21,7 +21,7 @@ jobs:
           java-version: 17
       - run: mvn --version
       - name: Setup `packer`
-        uses: hashicorp/setup-packer@3.0.0
+        uses: hashicorp/setup-packer@v3.0.0
         id: setup
       - run: packer version
       # launch
