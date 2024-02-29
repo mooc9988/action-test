@@ -2,6 +2,20 @@ name: Installer job
 
 on:
   workflow_dispatch:
+    inputs:
+      module:
+        description: 'module'
+        required: true
+        default: 'driver-afk-tmp'
+        type: choice
+        options:
+          - driver-afk-long-running
+          - driver-afk-chaos
+          - driver-afk-tmp
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.module }}
+  cancel-in-progress: false
 
 jobs:
   run_long_running:
