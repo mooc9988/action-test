@@ -27,6 +27,8 @@ jobs:
       # launch
       - name: Set up terraform
         uses: hashicorp/setup-terraform@v3
+      - run: python3 --version
+      - run: pip3 list
       - run: terraform version
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
