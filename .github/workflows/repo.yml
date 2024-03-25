@@ -1,0 +1,31 @@
+name: Long running operation for KOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      kafka-branch:
+        description: 'kafka branch'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - 'main'
+          - '1.0'
+
+jobs:
+  run_long_running:
+    name: "branch test"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout KOS repo
+        uses: actions/checkout@v4
+        with:
+          repository: AutoMQ/automq
+          ref: ${{ inputs.kafka-branch }}
+          path: automq
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      # - run: mvn --version
