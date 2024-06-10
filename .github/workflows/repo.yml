@@ -1,4 +1,4 @@
-name: Long running operation for KOS
+name: Branch operation for kafka
 
 on:
   workflow_dispatch:
